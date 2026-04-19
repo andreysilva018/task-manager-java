@@ -8,17 +8,27 @@ package Model;
  *
  * @author Windows
  */
-public class Tarefa {
+public class Tarefas {
+    private int codigo;
     private String titulo;
     private String descricao;
-    private boolean status;
+    private String status;
+    private boolean ativo;
 
-    public Tarefa(String titulo,String descricao){
+    public Tarefas(String titulo,String descricao, String status, boolean ativo){
         this.titulo = titulo;
         this.descricao = descricao;
-        this.status = false;
+        this.status = status;
+        this.ativo = ativo;
     }
 
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
     public String getTitulo() {
         return titulo;
     }
@@ -35,12 +45,21 @@ public class Tarefa {
         this.descricao = descricao;
     }
 
-    public boolean isStatus() {
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
+    
     
 }
