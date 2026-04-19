@@ -9,21 +9,21 @@ package Model;
  * @author Windows
  */
 public class Tarefa {
-    private string titulo;
-    private string descricao;
+    private String titulo;
+    private String descricao;
     private boolean status;
 
-    public Tarefa(string titulo,string descricao){
+    public Tarefa(String titulo,string descricao){
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = false;
     }
 
-    public string getTitulo(){
+    public String getTitulo(){
         return titulo;
     }
 
-    public string getDescricao(){
+    public String getDescricao(){
         return descricao;
     }
 
