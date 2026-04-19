@@ -10,4 +10,11 @@
         <maven.compiler.release>22</maven.compiler.release>
         <exec.mainClass>com.mycompany.task.manager.TaskManager</exec.mainClass>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.0.33</version>
+        </dependency>
+    </dependencies>
 </project>

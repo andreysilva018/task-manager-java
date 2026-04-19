@@ -13,26 +13,34 @@ public class Tarefa {
     private String descricao;
     private boolean status;
 
-    public Tarefa(String titulo,string descricao){
+    public Tarefa(String titulo,String descricao){
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = false;
     }
 
-    public String getTitulo(){
+    public String getTitulo() {
         return titulo;
     }
 
-    public String getDescricao(){
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getDescricao() {
         return descricao;
     }
 
-    public boolean setStatus(){
-        this.status = true;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
-    public boolean getStatus(){
+
+    public boolean isStatus() {
         return status;
     }
-    
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    
 }
