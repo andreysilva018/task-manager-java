@@ -22,6 +22,9 @@ public class Tarefas {
         this.ativo = ativo;
     }
 
+    public Tarefas() {
+    }
+
     public int getCodigo() {
         return codigo;
     }

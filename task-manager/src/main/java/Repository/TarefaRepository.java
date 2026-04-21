@@ -8,6 +8,9 @@ import Model.Tarefas;
 import connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,5 +36,27 @@ public class TarefaRepository {
         
         stmt.execute();
         stmt.close();
+    }
+    
+    public List<Tarefas> listarTarefas() throws Exception{
+        List<Tarefas> lista = new ArrayList<>();
+        String sql = "Select * from tb_tarefas";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        while(rs.next()){
+            Tarefas tarefa = new Tarefas();
+            tarefa.setCodigo(rs.getInt("ID"));
+            tarefa.setTitulo(rs.getString("TITULO"));
+            tarefa.setDescricao(rs.getString("DESCRICAO"));
+            tarefa.setStatus(rs.getString("STATUS"));
+            tarefa.setAtivo(rs.getBoolean("ATIVO"));
+            
+            lista.add(tarefa);
+        }
+        rs.close();
+        stmt.close();
+        return lista;
     }
 }
