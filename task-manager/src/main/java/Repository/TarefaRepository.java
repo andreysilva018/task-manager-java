@@ -38,6 +38,31 @@ public class TarefaRepository {
         stmt.close();
     }
     
+    public void AtualizarTarefa(Tarefas tarefa) throws Exception{
+        String sql = "UPDATE tb_tarefas(TITULO=?, DESCRICAO=?, STATUS=?)";
+        
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, tarefa.getTitulo());
+        stmt.setString(2, tarefa.getDescricao());
+        stmt.setString(3, tarefa.getStatus());
+        stmt.setBoolean(4, tarefa.isAtivo());
+        stmt.setInt(5, tarefa.getId());
+        
+        stmt.execute();
+        stmt.close();
+    }
+    
+    public void AlterarStatusTarefa(Tarefas tarefa) throws Exception{
+        String sql = "UPDATE tb_tarefas SET status = ? WHERE id = ?";
+        
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, tarefa.getStatus());
+        stmt.setInt(2, tarefa.getId());
+        
+        stmt.executeUpdate();
+        stmt.close();
+    }
+    
     public List<Tarefas> listarTarefas() throws Exception{
         List<Tarefas> lista = new ArrayList<>();
         String sql = "Select * from tb_tarefas";
@@ -47,7 +72,7 @@ public class TarefaRepository {
         
         while(rs.next()){
             Tarefas tarefa = new Tarefas();
-            tarefa.setCodigo(rs.getInt("ID"));
+            tarefa.setId(rs.getInt("ID"));
             tarefa.setTitulo(rs.getString("TITULO"));
             tarefa.setDescricao(rs.getString("DESCRICAO"));
             tarefa.setStatus(rs.getString("STATUS"));

@@ -9,28 +9,33 @@ package Model;
  * @author Windows
  */
 public class Tarefas {
-    private int codigo;
+    private int id;
     private String titulo;
     private String descricao;
     private String status;
     private boolean ativo;
 
-    public Tarefas(String titulo,String descricao, String status, boolean ativo){
+    public Tarefas(String titulo, String descricao, String status, boolean ativo){
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = status;
         this.ativo = ativo;
     }
+    
+    public Tarefas(int id, String status){
+        this.id = id;
+        this.status = status;
+    }
 
     public Tarefas() {
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getId() {
+        return id;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setId(int id) {
+        this.id = id;
     }
     public String getTitulo() {
         return titulo;
@@ -64,5 +69,9 @@ public class Tarefas {
         this.status = status;
     }
     
+    @Override
+    public String toString(){
+        return titulo;
+    }
     
 }

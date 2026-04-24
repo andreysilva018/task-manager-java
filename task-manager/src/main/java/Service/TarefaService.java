@@ -19,12 +19,32 @@ public class TarefaService {
         String status = "Pendente";
         boolean ativo = true;
         
-        Tarefas tarefa = new Tarefas(titulo, descricao, status, ativo);
+        Tarefas tarefa = new Tarefas(titulo, descricao, status.toUpperCase(), ativo);
         repository.CadastrarTarefa(tarefa);
     }
     
     public List<Tarefas> listarTarefas() throws Exception{
         return repository.listarTarefas();
+    }
+    
+    public void AtenderTarefa(int id) throws Exception{
+        TarefaRepository repository = new TarefaRepository();
+        
+        String status = "Em andamento";
+        
+        Tarefas tarefa = new Tarefas(id, status.toUpperCase());
+        repository.AlterarStatusTarefa(tarefa);
+        
+        
+    }
+    
+    public void ConcluirTarefa(int id) throws Exception{
+        TarefaRepository repository = new TarefaRepository();
+        
+        String status = "Concluido";
+        
+        Tarefas tarefa = new Tarefas(id, status.toUpperCase());
+        repository.AlterarStatusTarefa(tarefa);
     }
     
 }
