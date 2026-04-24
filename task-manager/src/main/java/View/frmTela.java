@@ -30,7 +30,7 @@ public class frmTela extends javax.swing.JFrame {
         List<Tarefas> lista = service.listarTarefas();
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus().equalsIgnoreCase("PENDENTE")){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.PENDETE){
                 modeloPendentes.addElement(t);
             }
         }
@@ -38,14 +38,14 @@ public class frmTela extends javax.swing.JFrame {
         
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus().equalsIgnoreCase("EM ANDAMENTO")){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.EM_ANDAMENTO){
                 modeloAndamento.addElement(t);
             }
         }
         jListAndamento.setModel(modeloAndamento);
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus().equalsIgnoreCase("CONCLUIDO")){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.CONCLUIDO){
                 modeloConcluido.addElement(t);
             }
         }

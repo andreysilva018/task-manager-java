@@ -15,11 +15,11 @@ import java.util.List;
 public class TarefaService {
     TarefaRepository repository = new TarefaRepository();
     
-    public void CadastrarTarefa(String titulo, String descricao) throws Exception{
-        String status = "Pendente";
+    public void CadastrarTarefa(String titulo, String descricao) throws Exception{        
+        Tarefas.StatusPedido status = Tarefas.StatusPedido.PENDETE;
         boolean ativo = true;
         
-        Tarefas tarefa = new Tarefas(titulo, descricao, status.toUpperCase(), ativo);
+        Tarefas tarefa = new Tarefas(titulo, descricao, status, ativo);
         repository.CadastrarTarefa(tarefa);
     }
     
@@ -30,20 +30,18 @@ public class TarefaService {
     public void AtenderTarefa(int id) throws Exception{
         TarefaRepository repository = new TarefaRepository();
         
-        String status = "Em andamento";
+        Tarefas.StatusPedido status = Tarefas.StatusPedido.EM_ANDAMENTO;
         
-        Tarefas tarefa = new Tarefas(id, status.toUpperCase());
+        Tarefas tarefa = new Tarefas(id, status);
         repository.AlterarStatusTarefa(tarefa);
-        
-        
     }
     
     public void ConcluirTarefa(int id) throws Exception{
         TarefaRepository repository = new TarefaRepository();
         
-        String status = "Concluido";
+        Tarefas.StatusPedido status = Tarefas.StatusPedido.CONCLUIDO;
         
-        Tarefas tarefa = new Tarefas(id, status.toUpperCase());
+        Tarefas tarefa = new Tarefas(id, status);
         repository.AlterarStatusTarefa(tarefa);
     }
     
