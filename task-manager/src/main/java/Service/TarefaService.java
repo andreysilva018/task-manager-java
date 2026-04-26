@@ -16,11 +16,14 @@ public class TarefaService {
     TarefaRepository repository = new TarefaRepository();
     
     public void CadastrarTarefa(String titulo, String descricao) throws Exception{        
-        Tarefas.StatusPedido status = Tarefas.StatusPedido.PENDETE;
+        Tarefas.StatusPedido status = Tarefas.StatusPedido.PENDENTE;
         boolean ativo = true;
         
         Tarefas tarefa = new Tarefas(titulo, descricao, status, ativo);
         repository.CadastrarTarefa(tarefa);
+    }
+    
+    public void AtualizarTarefa(String titulo, String descricao) throws Exception{
     }
     
     public List<Tarefas> listarTarefas() throws Exception{
@@ -39,7 +42,7 @@ public class TarefaService {
     public void ConcluirTarefa(int id) throws Exception{
         TarefaRepository repository = new TarefaRepository();
         
-        Tarefas.StatusPedido status = Tarefas.StatusPedido.CONCLUIDO;
+        Tarefas.StatusPedido status = Tarefas.StatusPedido.CONCLUIDA;
         
         Tarefas tarefa = new Tarefas(id, status);
         repository.AlterarStatusTarefa(tarefa);

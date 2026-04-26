@@ -44,7 +44,7 @@ public class TarefaRepository {
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, tarefa.getTitulo());
         stmt.setString(2, tarefa.getDescricao());
-        stmt.setString(3, tarefa.getStatus().toString().toUpperCase());
+        stmt.setString(3, tarefa.getStatus().name());
         stmt.setBoolean(4, tarefa.isAtivo());
         stmt.setInt(5, tarefa.getId());
         
@@ -56,7 +56,7 @@ public class TarefaRepository {
         String sql = "UPDATE tb_tarefas SET status = ? WHERE id = ?";
         
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, tarefa.getStatus().toString().toUpperCase());
+        stmt.setString(1, tarefa.getStatus().name());
         stmt.setInt(2, tarefa.getId());
         
         stmt.executeUpdate();
@@ -75,7 +75,8 @@ public class TarefaRepository {
             tarefa.setId(rs.getInt("ID"));
             tarefa.setTitulo(rs.getString("TITULO"));
             tarefa.setDescricao(rs.getString("DESCRICAO"));
-            tarefa.setStatus(Tarefas.StatusPedido.valueOf(rs.getString("STATUS").toUpperCase()));
+            System.out.println("Status do banco: [" + rs.getString("STATUS") + "]");
+            tarefa.setStatus(Tarefas.StatusPedido.valueOf(rs.getString("STATUS")));
             tarefa.setAtivo(rs.getBoolean("ATIVO"));
             
             lista.add(tarefa);

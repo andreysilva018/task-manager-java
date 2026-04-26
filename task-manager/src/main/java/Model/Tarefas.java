@@ -16,9 +16,9 @@ public class Tarefas {
     private boolean ativo;
 
     public enum StatusPedido{
-        PENDETE,
+        PENDENTE,
         EM_ANDAMENTO,
-        CONCLUIDO
+        CONCLUIDA
     }
     
     public Tarefas(String titulo, String descricao, StatusPedido status, boolean ativo){

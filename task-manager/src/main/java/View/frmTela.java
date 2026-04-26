@@ -26,11 +26,12 @@ public class frmTela extends javax.swing.JFrame {
         DefaultListModel<Tarefas> modeloPendentes = new DefaultListModel<>();
         DefaultListModel<Tarefas> modeloAndamento = new DefaultListModel<>();
         DefaultListModel<Tarefas> modeloConcluido = new DefaultListModel<>();
+        
         TarefaService service = new TarefaService();
         List<Tarefas> lista = service.listarTarefas();
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.PENDETE){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.PENDENTE){
                 modeloPendentes.addElement(t);
             }
         }
@@ -45,7 +46,7 @@ public class frmTela extends javax.swing.JFrame {
         jListAndamento.setModel(modeloAndamento);
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.CONCLUIDO){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.CONCLUIDA){
                 modeloConcluido.addElement(t);
             }
         }
@@ -204,12 +205,18 @@ public class frmTela extends javax.swing.JFrame {
         lblAndamento.setText("EM ANDAMENTO");
 
         btnAtender.setText("Atender");
-        btnAtender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAtenderMouseClicked(evt);
+        btnAtender.setEnabled(false);
+        btnAtender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtenderActionPerformed(evt);
             }
         });
 
+        jListPendentes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListPendentesMouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jListPendentes);
 
         jScrollPane6.setViewportView(jListConcluido);
@@ -217,12 +224,18 @@ public class frmTela extends javax.swing.JFrame {
         lblAndamento1.setBackground(new java.awt.Color(255, 255, 102));
         lblAndamento1.setText("CONCLUÍDO");
 
+        jListAndamento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListAndamentoMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jListAndamento);
 
         btnConcluir.setText("Concluir");
-        btnConcluir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConcluirMouseClicked(evt);
+        btnConcluir.setEnabled(false);
+        btnConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConcluirActionPerformed(evt);
             }
         });
 
@@ -307,57 +320,73 @@ public class frmTela extends javax.swing.JFrame {
             }else{
                 String titulo = txtTitulo.getText();
                 String descricao = txtDescricao.getText();
-                JOptionPane.showMessageDialog(null, "Testde comparação deu certo titul inserido:" + titulo);
                 TarefaService service = new TarefaService();
                 service.CadastrarTarefa(titulo, descricao);
+                JOptionPane.showMessageDialog(null, "tarefa cadastrada com sucesso");
             }            
         } catch (Exception erro) {
+            erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro no cadastro da tarefa - Erro:" + erro);
         }
-        
+        jTabbedPane1.setSelectedIndex(1);
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         try {
             CarregarTarefas();
         } catch (Exception erro) {
+            erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro para carregar lista de tarefas - Erro:" + erro);
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void btnAtenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtenderMouseClicked
+    private void jListPendentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseClicked
+        btnAtender.setEnabled(true);
+    }//GEN-LAST:event_jListPendentesMouseClicked
+
+    private void jListAndamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListAndamentoMouseClicked
+        btnConcluir.setEnabled(true);
+    }//GEN-LAST:event_jListAndamentoMouseClicked
+
+    private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
         try {
-            TarefaService service = new TarefaService();
-            Tarefas tarefaSelecionada = jListPendentes.getSelectedValue();
-            if(tarefaSelecionada != null){
-                int id = tarefaSelecionada.getId();
-                service.AtenderTarefa(id);
-                JOptionPane.showMessageDialog(null, "Status da tarefa atualizado com sucesso!");
-            }else{
+            if(btnAtender.isEnabled() == true){
+                TarefaService service = new TarefaService();
+                Tarefas tarefaSelecionada = jListPendentes.getSelectedValue();
+                if(tarefaSelecionada != null){
+                    int id = tarefaSelecionada.getId();
+                    service.AtenderTarefa(id);
+                    JOptionPane.showMessageDialog(null, "Status da tarefa atualizado com sucesso!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa!");
+                }            
+            }else {
                 JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa!");
-            }            
+            }
         } catch (Exception erro) {
+            erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro para atualizar status da tarefa - Erro:" + erro);
         }
-        
-    }//GEN-LAST:event_btnAtenderMouseClicked
+    }//GEN-LAST:event_btnAtenderActionPerformed
 
-    private void btnConcluirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConcluirMouseClicked
+    private void btnConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConcluirActionPerformed
         try {
-            TarefaService service = new TarefaService();
-            Tarefas tarefaSelecionada = jListAndamento.getSelectedValue();
-            if(tarefaSelecionada == null){
-                JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa!");
-            }else{
-                int id = tarefaSelecionada.getId();
-                service.ConcluirTarefa(id);
-                JOptionPane.showMessageDialog(null, "Tarefa concluida com sucesso!");
+            if(btnConcluir.isEnabled() == true){
+                TarefaService service = new TarefaService();
+                Tarefas tarefaSelecionada = jListAndamento.getSelectedValue();
+                if(tarefaSelecionada == null){
+                    JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa!");
+                }else{
+                    int id = tarefaSelecionada.getId();
+                    service.ConcluirTarefa(id);
+                    JOptionPane.showMessageDialog(null, "Tarefa concluida com sucesso!");
+                }
             }
-            
         } catch (Exception erro) {
+            erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro para concluir tarefa - Erro:" + erro);
         }
-    }//GEN-LAST:event_btnConcluirMouseClicked
+    }//GEN-LAST:event_btnConcluirActionPerformed
 
     /**
      * @param args the command line arguments
