@@ -334,6 +334,8 @@ public class frmTela extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         try {
             CarregarTarefas();
+            btnAtender.setEnabled(false);
+            btnConcluir.setEnabled(false);
         } catch (Exception erro) {
             erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro para carregar lista de tarefas - Erro:" + erro);
