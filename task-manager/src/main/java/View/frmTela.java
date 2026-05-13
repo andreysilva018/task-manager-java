@@ -5,12 +5,14 @@
 package View;
 
 import Model.Tarefas;
+import Model.Utilitarios;
 import Service.TarefaService;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.TabbedPaneUI;
 
 /**
  *
@@ -75,8 +77,8 @@ public class frmTela extends javax.swing.JFrame {
         lblCodigo = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         lblDescricao = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescricao = new javax.swing.JTextArea();
@@ -92,6 +94,8 @@ public class frmTela extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jListAndamento = new javax.swing.JList<>();
         btnConcluir = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -133,9 +137,19 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Atualizar");
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Excluir");
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         lblDescricao.setText("Descrição:");
 
@@ -158,9 +172,9 @@ public class frmTela extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(176, 176, 176)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtTitulo)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +183,7 @@ public class frmTela extends javax.swing.JFrame {
                 .addContainerGap(308, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnSalvar, jButton2, jButton3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAtualizar, btnExcluir, btnSalvar});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,12 +203,12 @@ public class frmTela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAtualizar)
+                    .addComponent(btnExcluir))
                 .addGap(37, 37, 37))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnSalvar, jButton2, jButton3});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAtualizar, btnExcluir, btnSalvar});
 
         jTabbedPane1.addTab("Cadastro de Tarefas", jPanel2);
 
@@ -239,6 +253,15 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
+        btnVoltar.setText("Estornar");
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -248,8 +271,12 @@ public class frmTela extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(btnAtender, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(206, 206, 206)
-                        .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(49, 49, 49)
+                        .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnVoltar)
+                        .addGap(50, 50, 50)
+                        .addComponent(btnEditar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +314,9 @@ public class frmTela extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtender, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar)
+                    .addComponent(btnEditar))
                 .addGap(44, 44, 44))
         );
 
@@ -323,6 +352,8 @@ public class frmTela extends javax.swing.JFrame {
                 TarefaService service = new TarefaService();
                 service.CadastrarTarefa(titulo, descricao);
                 JOptionPane.showMessageDialog(null, "tarefa cadastrada com sucesso");
+                new Utilitarios().LimpaTela(jPanel1);
+                jTabbedPane1.setSelectedIndex(1);
             }            
         } catch (Exception erro) {
             erro.printStackTrace();
@@ -348,6 +379,8 @@ public class frmTela extends javax.swing.JFrame {
         btnConcluir.setEnabled(true);
     }//GEN-LAST:event_jListAndamentoMouseClicked
 
+    /*Botões da tela de lista de tarefas*/
+    
     private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
         try {
             if(btnAtender.isEnabled() == true){
@@ -388,6 +421,46 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConcluirActionPerformed
 
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        try {
+            int id = Integer.parseInt(txtCodigo.getText());
+            TarefaService service = new TarefaService();
+            service.InativarTarefa(id);
+            
+            JOptionPane.showMessageDialog(null, "Tarefa excluida com sucesso!");
+            
+        } catch (Exception erro) {
+            erro.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro para excluir tarefa - Erro:" + erro);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        try {
+            Tarefas tarefaSelecionada = jListPendentes.getSelectedValue();
+            if(tarefaSelecionada == null){
+                JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa");
+            }else{
+                if(tarefaSelecionada.getStatus() != Tarefas.StatusPedido.PENDENTE){
+                    JOptionPane.showMessageDialog(null, "Apenas tarefas pendentes podem ser editadas!");
+                    return;
+                }else{
+                    jTabbedPane1.setSelectedIndex(0);
+                    txtCodigo.setText(String.valueOf(tarefaSelecionada.getId()));
+                    txtTitulo.setText(tarefaSelecionada.getTitulo());
+                    txtDescricao.setText(tarefaSelecionada.getDescricao());
+                }
+            }
+        } catch (Exception erro) {
+            erro.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro de envio de dados da tarefa - Erro:" + erro);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -425,10 +498,12 @@ public class frmTela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtender;
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnConcluir;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<Tarefas> jListAndamento;
     private javax.swing.JList<Tarefas> jListConcluido;

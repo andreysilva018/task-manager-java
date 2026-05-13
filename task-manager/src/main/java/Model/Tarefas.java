@@ -28,6 +28,11 @@ public class Tarefas {
         this.ativo = ativo;
     }
     
+    public Tarefas(int id, boolean ativo){
+        this.id = id;
+        this.ativo = ativo;
+    }
+    
     public Tarefas(int id, StatusPedido status){
         this.id = id;
         this.status = status;

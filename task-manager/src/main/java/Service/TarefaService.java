@@ -23,25 +23,27 @@ public class TarefaService {
         repository.CadastrarTarefa(tarefa);
     }
     
-    public void AtualizarTarefa(String titulo, String descricao) throws Exception{
+    public void AtualizarTarefa(String titulo, String descricao, int id) throws Exception{
+    }
+    
+    public void InativarTarefa(int id) throws Exception{
+        boolean ativo = true;
+        Tarefas tarefa = new Tarefas(id, ativo);
+        repository.InativarTarefa(tarefa);
     }
     
     public List<Tarefas> listarTarefas() throws Exception{
         return repository.listarTarefas();
     }
     
-    public void AtenderTarefa(int id) throws Exception{
-        TarefaRepository repository = new TarefaRepository();
-        
+    public void AtenderTarefa(int id) throws Exception{        
         Tarefas.StatusPedido status = Tarefas.StatusPedido.EM_ANDAMENTO;
         
         Tarefas tarefa = new Tarefas(id, status);
         repository.AlterarStatusTarefa(tarefa);
     }
     
-    public void ConcluirTarefa(int id) throws Exception{
-        TarefaRepository repository = new TarefaRepository();
-        
+    public void ConcluirTarefa(int id) throws Exception{        
         Tarefas.StatusPedido status = Tarefas.StatusPedido.CONCLUIDA;
         
         Tarefas tarefa = new Tarefas(id, status);
