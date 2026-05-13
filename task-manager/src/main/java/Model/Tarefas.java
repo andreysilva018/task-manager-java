@@ -38,20 +38,24 @@ public class Tarefas {
         this.status = status;
     }
 
+    public Tarefas(int id, boolean ativo){
+        this.id = id;
+        this.ativo = ativo;
+    }
+    
     public Tarefas() {
     }
 
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
+    
     public String getTitulo() {
         return titulo;
     }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -59,7 +63,6 @@ public class Tarefas {
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -67,7 +70,6 @@ public class Tarefas {
     public boolean isAtivo() {
         return ativo;
     }
-
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
@@ -75,7 +77,6 @@ public class Tarefas {
     public StatusPedido getStatus() {
         return status;
     }
-
     public void setStatus(StatusPedido status) {
         this.status = status;
     }

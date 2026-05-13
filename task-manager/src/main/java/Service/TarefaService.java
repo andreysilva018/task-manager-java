@@ -50,4 +50,8 @@ public class TarefaService {
         repository.AlterarStatusTarefa(tarefa);
     }
     
+    public void DesativarTarefa(int id){
+        
+    }
+    
 }
