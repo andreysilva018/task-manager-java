@@ -55,8 +55,11 @@ public class TarefaRepository {
         String sql = "UPDATE tb_tarefas set ATIVO = ? WHERE ID=?";
         
         PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setBoolean(1, tarefa.setAtivo(false));
+        stmt.setBoolean(1, tarefa.isAtivo());
         stmt.setInt(2, tarefa.getId());
+        
+        stmt.executeUpdate();
+        stmt.close();
     }
     
     public void AlterarStatusTarefa(Tarefas tarefa) throws Exception{
@@ -93,7 +96,6 @@ public class TarefaRepository {
             tarefa.setId(rs.getInt("ID"));
             tarefa.setTitulo(rs.getString("TITULO"));
             tarefa.setDescricao(rs.getString("DESCRICAO"));
-            System.out.println("Status do banco: [" + rs.getString("STATUS") + "]");
             tarefa.setStatus(Tarefas.StatusPedido.valueOf(rs.getString("STATUS")));
             tarefa.setAtivo(rs.getBoolean("ATIVO"));
             

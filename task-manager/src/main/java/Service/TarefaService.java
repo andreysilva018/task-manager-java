@@ -27,7 +27,7 @@ public class TarefaService {
     }
     
     public void InativarTarefa(int id) throws Exception{
-        boolean ativo = true;
+        boolean ativo = false;
         Tarefas tarefa = new Tarefas(id, ativo);
         repository.InativarTarefa(tarefa);
     }
