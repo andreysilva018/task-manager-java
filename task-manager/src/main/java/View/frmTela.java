@@ -55,6 +55,13 @@ public class frmTela extends javax.swing.JFrame {
         jListConcluido.setModel(modeloConcluido);
     }
     
+    public void desabilitarBotoes(){
+        btnAtender.setEnabled(false);
+        btnConcluir.setEnabled(false);
+        btnEditar.setEnabled(false);
+        btnEstornar.setEnabled(false);
+    }
+    
     public frmTela() {
         initComponents();
     }
@@ -94,7 +101,7 @@ public class frmTela extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jListAndamento = new javax.swing.JList<>();
         btnConcluir = new javax.swing.JButton();
-        btnVoltar = new javax.swing.JButton();
+        btnEstornar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -122,6 +129,12 @@ public class frmTela extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         lblTitulo.setText("Titulo:");
 
@@ -232,9 +245,20 @@ public class frmTela extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jListPendentesMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jListPendentesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jListPendentesMouseExited(evt);
+            }
         });
         jScrollPane5.setViewportView(jListPendentes);
 
+        jListConcluido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListConcluidoMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(jListConcluido);
 
         lblAndamento1.setBackground(new java.awt.Color(255, 255, 102));
@@ -255,9 +279,11 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar.setText("Estornar");
+        btnEstornar.setText("Estornar");
+        btnEstornar.setEnabled(false);
 
         btnEditar.setText("Editar");
+        btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -276,7 +302,7 @@ public class frmTela extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(btnVoltar)
+                        .addComponent(btnEstornar)
                         .addGap(50, 50, 50)
                         .addComponent(btnEditar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -299,6 +325,8 @@ public class frmTela extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jScrollPane3, jScrollPane5, jScrollPane6});
 
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnConcluir, btnEditar, btnEstornar});
+
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -317,12 +345,14 @@ public class frmTela extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAtender, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltar)
+                    .addComponent(btnEstornar)
                     .addComponent(btnEditar))
                 .addGap(44, 44, 44))
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane3, jScrollPane5, jScrollPane6});
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnConcluir, btnEditar, btnEstornar});
 
         jTabbedPane1.addTab("Lista de tarefas ", jPanel3);
 
@@ -367,20 +397,23 @@ public class frmTela extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         try {
             CarregarTarefas();
-            btnAtender.setEnabled(false);
-            btnConcluir.setEnabled(false);
+            desabilitarBotoes();
         } catch (Exception erro) {
             erro.printStackTrace();
             JOptionPane.showMessageDialog(null, "Erro para carregar lista de tarefas - Erro:" + erro);
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void jListPendentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseClicked
-        btnAtender.setEnabled(true);
-    }//GEN-LAST:event_jListPendentesMouseClicked
-
     private void jListAndamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListAndamentoMouseClicked
-        btnConcluir.setEnabled(true);
+        try {
+            CarregarTarefas();
+            btnConcluir.setEnabled(true);
+            btnEstornar.setEnabled(true);
+            
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro para carregar a lista de tarefas em Andamento - Erro:" + erro);
+            erro.printStackTrace();
+        }
     }//GEN-LAST:event_jListAndamentoMouseClicked
 
     /*Botões da tela de lista de tarefas*/
@@ -467,6 +500,39 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void jListConcluidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListConcluidoMouseClicked
+        try {
+            CarregarTarefas();
+            btnEstornar.setEnabled(true);
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro para carregar lista de tarefas concluidas - Erro:" + erro);
+            erro.printStackTrace();
+        }
+    }//GEN-LAST:event_jListConcluidoMouseClicked
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        try {
+            CarregarTarefas();
+        } catch (Exception erro) {
+            JOptionPane.showMessageDialog(null, "Erro:" + erro);
+            erro.printStackTrace();
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jListPendentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseEntered
+        btnAtender.setEnabled(true);
+        btnEditar.setEnabled(true);
+    }//GEN-LAST:event_jListPendentesMouseEntered
+
+    private void jListPendentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseExited
+        desabilitarBotoes();
+    }//GEN-LAST:event_jListPendentesMouseExited
+
+    private void jListPendentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseClicked
+        btnAtender.setEnabled(true);
+        btnEditar.setEnabled(true);
+    }//GEN-LAST:event_jListPendentesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -507,9 +573,9 @@ public class frmTela extends javax.swing.JFrame {
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnConcluir;
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEstornar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JList<Tarefas> jListAndamento;
     private javax.swing.JList<Tarefas> jListConcluido;

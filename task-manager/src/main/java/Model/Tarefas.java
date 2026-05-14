@@ -27,17 +27,12 @@ public class Tarefas {
         this.status = status;
         this.ativo = ativo;
     }
-    
-    public Tarefas(int id, boolean ativo){
-        this.id = id;
-        this.ativo = ativo;
-    }
-    
+        
     public Tarefas(int id, StatusPedido status){
         this.id = id;
         this.status = status;
     }
-
+    
     public Tarefas(int id, boolean ativo){
         this.id = id;
         this.ativo = ativo;
