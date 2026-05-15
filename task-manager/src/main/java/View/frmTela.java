@@ -33,7 +33,7 @@ public class frmTela extends javax.swing.JFrame {
         List<Tarefas> lista = service.listarTarefas();
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.PENDENTE){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusTarefa.PENDENTE){
                 modeloPendentes.addElement(t);
             }
         }
@@ -41,14 +41,14 @@ public class frmTela extends javax.swing.JFrame {
         
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.EM_ANDAMENTO){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusTarefa.EM_ANDAMENTO){
                 modeloAndamento.addElement(t);
             }
         }
         jListAndamento.setModel(modeloAndamento);
         
         for(Tarefas t : lista){
-            if(t.isAtivo() && t.getStatus() == Tarefas.StatusPedido.CONCLUIDA){
+            if(t.isAtivo() && t.getStatus() == Tarefas.StatusTarefa.CONCLUIDA){
                 modeloConcluido.addElement(t);
             }
         }
@@ -241,22 +241,16 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
-        jListPendentes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListPendentesMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jListPendentesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jListPendentesMouseExited(evt);
+        jListPendentes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListPendentesValueChanged(evt);
             }
         });
         jScrollPane5.setViewportView(jListPendentes);
 
-        jListConcluido.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListConcluidoMouseClicked(evt);
+        jListConcluido.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListConcluidoValueChanged(evt);
             }
         });
         jScrollPane6.setViewportView(jListConcluido);
@@ -264,9 +258,9 @@ public class frmTela extends javax.swing.JFrame {
         lblAndamento1.setBackground(new java.awt.Color(255, 255, 102));
         lblAndamento1.setText("CONCLUÍDO");
 
-        jListAndamento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jListAndamentoMouseClicked(evt);
+        jListAndamento.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListAndamentoValueChanged(evt);
             }
         });
         jScrollPane3.setViewportView(jListAndamento);
@@ -281,6 +275,11 @@ public class frmTela extends javax.swing.JFrame {
 
         btnEstornar.setText("Estornar");
         btnEstornar.setEnabled(false);
+        btnEstornar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstornarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
         btnEditar.setEnabled(false);
@@ -404,18 +403,6 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
-    private void jListAndamentoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListAndamentoMouseClicked
-        try {
-            CarregarTarefas();
-            btnConcluir.setEnabled(true);
-            btnEstornar.setEnabled(true);
-            
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro para carregar a lista de tarefas em Andamento - Erro:" + erro);
-            erro.printStackTrace();
-        }
-    }//GEN-LAST:event_jListAndamentoMouseClicked
-
     /*Botões da tela de lista de tarefas*/
     
     private void btnAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtenderActionPerformed
@@ -484,7 +471,7 @@ public class frmTela extends javax.swing.JFrame {
             if(tarefaSelecionada == null){
                 JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa");
             }else{
-                if(tarefaSelecionada.getStatus() != Tarefas.StatusPedido.PENDENTE){
+                if(tarefaSelecionada.getStatus() != Tarefas.StatusTarefa.PENDENTE){
                     JOptionPane.showMessageDialog(null, "Apenas tarefas pendentes podem ser editadas!");
                     return;
                 }else{
@@ -500,16 +487,6 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jListConcluidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListConcluidoMouseClicked
-        try {
-            CarregarTarefas();
-            btnEstornar.setEnabled(true);
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro para carregar lista de tarefas concluidas - Erro:" + erro);
-            erro.printStackTrace();
-        }
-    }//GEN-LAST:event_jListConcluidoMouseClicked
-
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         try {
             CarregarTarefas();
@@ -519,19 +496,68 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void jListPendentesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseEntered
-        btnAtender.setEnabled(true);
-        btnEditar.setEnabled(true);
-    }//GEN-LAST:event_jListPendentesMouseEntered
-
-    private void jListPendentesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseExited
+    private void jListPendentesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListPendentesValueChanged
         desabilitarBotoes();
-    }//GEN-LAST:event_jListPendentesMouseExited
+        if(!evt.getValueIsAdjusting()){
+            if(jListPendentes.getSelectedIndex() != -1){
+                
+                jListAndamento.clearSelection();
+                jListConcluido.clearSelection();
+                btnAtender.setEnabled(true);
+                btnEditar.setEnabled(true);
+            }
+        }        
+    }//GEN-LAST:event_jListPendentesValueChanged
 
-    private void jListPendentesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListPendentesMouseClicked
-        btnAtender.setEnabled(true);
-        btnEditar.setEnabled(true);
-    }//GEN-LAST:event_jListPendentesMouseClicked
+    private void jListAndamentoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListAndamentoValueChanged
+        desabilitarBotoes();
+        if(!evt.getValueIsAdjusting()){
+            if(jListAndamento.getSelectedIndex() != -1){
+                
+                jListPendentes.clearSelection();
+                jListConcluido.clearSelection();
+                btnConcluir.setEnabled(true);
+                btnEstornar.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jListAndamentoValueChanged
+
+    private void jListConcluidoValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListConcluidoValueChanged
+        desabilitarBotoes();
+        if(!evt.getValueIsAdjusting()){
+            if(jListConcluido.getSelectedIndex() != -1){
+                
+                jListPendentes.clearSelection();
+                jListAndamento.clearSelection();
+                btnEstornar.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jListConcluidoValueChanged
+
+    private void btnEstornarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstornarActionPerformed
+        try {
+            TarefaService service = new TarefaService();
+            Tarefas tarefaSelecionadaEmAndamento = jListAndamento.getSelectedValue();
+            Tarefas tarefaSelecionadaConcluida = jListConcluido.getSelectedValue();
+            if(tarefaSelecionadaEmAndamento == null && tarefaSelecionadaConcluida == null){
+                JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa");
+            } else {
+                if(tarefaSelecionadaEmAndamento != null && tarefaSelecionadaConcluida == null){
+                    int id = tarefaSelecionadaEmAndamento.getId();
+                    service.EstornarTarefa(id);
+                    JOptionPane.showMessageDialog(null, "Tarefa estornada com sucesso!");                    
+                } 
+                else if(tarefaSelecionadaEmAndamento == null && tarefaSelecionadaConcluida != null){
+                    int id = tarefaSelecionadaConcluida.getId();
+                    service.EstornarTarefa(id);
+                    JOptionPane.showMessageDialog(null, "Tarefa estornada com sucesso!");
+                }
+            }
+        } catch (Exception erro) {
+            erro.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro para estornar o status da tarefa - Erro:" + erro);
+        }
+    }//GEN-LAST:event_btnEstornarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -16,7 +16,7 @@ public class TarefaService {
     TarefaRepository repository = new TarefaRepository();
     
     public void CadastrarTarefa(String titulo, String descricao) throws Exception{        
-        Tarefas.StatusPedido status = Tarefas.StatusPedido.PENDENTE;
+        Tarefas.StatusTarefa status = Tarefas.StatusTarefa.PENDENTE;
         boolean ativo = true;
         
         Tarefas tarefa = new Tarefas(titulo, descricao, status, ativo);
@@ -37,21 +37,32 @@ public class TarefaService {
     }
     
     public void AtenderTarefa(int id) throws Exception{        
-        Tarefas.StatusPedido status = Tarefas.StatusPedido.EM_ANDAMENTO;
+        Tarefas.StatusTarefa status = Tarefas.StatusTarefa.EM_ANDAMENTO;
         
         Tarefas tarefa = new Tarefas(id, status);
         repository.AlterarStatusTarefa(tarefa);
     }
     
     public void ConcluirTarefa(int id) throws Exception{        
-        Tarefas.StatusPedido status = Tarefas.StatusPedido.CONCLUIDA;
+        Tarefas.StatusTarefa status = Tarefas.StatusTarefa.CONCLUIDA;
         
         Tarefas tarefa = new Tarefas(id, status);
         repository.AlterarStatusTarefa(tarefa);
     }
-    
-    public void DesativarTarefa(int id){
-        
+
+    public void EstornarTarefa(int id) throws Exception{
+        Tarefas tarefa = new Tarefas();
+        if (tarefa.getStatus() == Tarefas.StatusTarefa.EM_ANDAMENTO){
+            Tarefas.StatusTarefa status = Tarefas.StatusTarefa.PENDENTE;
+            
+            tarefa = new Tarefas(id, status);
+            repository.AlterarStatusTarefa(tarefa);
+        }
+        else if(tarefa.getStatus() == Tarefas.StatusTarefa.CONCLUIDA){
+            Tarefas.StatusTarefa status = Tarefas.StatusTarefa.EM_ANDAMENTO;
+            
+            tarefa = new Tarefas(id, status);
+            repository.AlterarStatusTarefa(tarefa);
+        }
     }
-    
 }

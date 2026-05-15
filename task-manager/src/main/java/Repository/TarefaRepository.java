@@ -96,7 +96,7 @@ public class TarefaRepository {
             tarefa.setId(rs.getInt("ID"));
             tarefa.setTitulo(rs.getString("TITULO"));
             tarefa.setDescricao(rs.getString("DESCRICAO"));
-            tarefa.setStatus(Tarefas.StatusPedido.valueOf(rs.getString("STATUS")));
+            tarefa.setStatus(Tarefas.StatusTarefa.valueOf(rs.getString("STATUS")));
             tarefa.setAtivo(rs.getBoolean("ATIVO"));
             
             lista.add(tarefa);

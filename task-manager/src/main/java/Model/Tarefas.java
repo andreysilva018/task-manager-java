@@ -12,23 +12,23 @@ public class Tarefas {
     private int id;
     private String titulo;
     private String descricao;
-    private StatusPedido status;
+    private StatusTarefa status;
     private boolean ativo;
 
-    public enum StatusPedido{
+    public enum StatusTarefa{
         PENDENTE,
         EM_ANDAMENTO,
         CONCLUIDA
     }
     
-    public Tarefas(String titulo, String descricao, StatusPedido status, boolean ativo){
+    public Tarefas(String titulo, String descricao, StatusTarefa status, boolean ativo){
         this.titulo = titulo;
         this.descricao = descricao;
         this.status = status;
         this.ativo = ativo;
     }
         
-    public Tarefas(int id, StatusPedido status){
+    public Tarefas(int id, StatusTarefa status){
         this.id = id;
         this.status = status;
     }
@@ -69,10 +69,10 @@ public class Tarefas {
         this.ativo = ativo;
     }
 
-    public StatusPedido getStatus() {
+    public StatusTarefa getStatus() {
         return status;
     }
-    public void setStatus(StatusPedido status) {
+    public void setStatus(StatusTarefa status) {
         this.status = status;
     }
     
