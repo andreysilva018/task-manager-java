@@ -6,6 +6,8 @@ package Model;
 
 import java.awt.Component;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -18,7 +20,18 @@ public class Utilitarios {
        Component components[] = container.getComponents();
        for(Component component : components){
            if(component instanceof JTextField){
-               ((JTextField) component).setText(null);
+               ((JTextField) component).setText("");
+           }
+           if(component instanceof JTextArea){
+               ((JTextArea) component).setText("");
+           }
+           if(component instanceof JScrollPane){
+               JScrollPane scroll = (JScrollPane) component;
+               
+               Component view = scroll.getViewport().getView();
+               if(view instanceof JTextArea){
+                   ((JTextArea) view).setText("");
+               }
            }
        }
     }

@@ -19,6 +19,7 @@ import javax.swing.plaf.TabbedPaneUI;
  * @author Windows
  */
 public class frmTela extends javax.swing.JFrame {
+    Utilitarios util = new Utilitarios();
 
     /**
      * Creates new form frmTela
@@ -383,7 +384,7 @@ public class frmTela extends javax.swing.JFrame {
                 TarefaService service = new TarefaService();
                 service.CadastrarTarefa(titulo, descricao);
                 JOptionPane.showMessageDialog(null, "tarefa cadastrada com sucesso");
-                new Utilitarios().LimpaTela(jPanel1);
+                util.LimpaTela(jPanel2);
                 jTabbedPane1.setSelectedIndex(1);
             }            
         } catch (Exception erro) {
@@ -454,10 +455,9 @@ public class frmTela extends javax.swing.JFrame {
             int id = Integer.parseInt(txtCodigo.getText());
             TarefaService service = new TarefaService();
             service.InativarTarefa(id);
-            Tarefas tarefa = new Tarefas();
-            System.out.println("Tarefa ativa ou inativa - Tarefa:" + tarefa.isAtivo());
-            
+            Tarefas tarefa = new Tarefas();            
             JOptionPane.showMessageDialog(null, "Tarefa excluida com sucesso!");
+            util.LimpaTela(jPanel2);
             
         } catch (Exception erro) {
             erro.printStackTrace();
@@ -539,17 +539,16 @@ public class frmTela extends javax.swing.JFrame {
             TarefaService service = new TarefaService();
             Tarefas tarefaSelecionadaEmAndamento = jListAndamento.getSelectedValue();
             Tarefas tarefaSelecionadaConcluida = jListConcluido.getSelectedValue();
+            
             if(tarefaSelecionadaEmAndamento == null && tarefaSelecionadaConcluida == null){
                 JOptionPane.showMessageDialog(null, "Certifique que selecionou alguma tarefa");
             } else {
                 if(tarefaSelecionadaEmAndamento != null && tarefaSelecionadaConcluida == null){
-                    int id = tarefaSelecionadaEmAndamento.getId();
-                    service.EstornarTarefa(id);
+                    service.EstornarTarefa(tarefaSelecionadaEmAndamento);
                     JOptionPane.showMessageDialog(null, "Tarefa estornada com sucesso!");                    
                 } 
                 else if(tarefaSelecionadaEmAndamento == null && tarefaSelecionadaConcluida != null){
-                    int id = tarefaSelecionadaConcluida.getId();
-                    service.EstornarTarefa(id);
+                    service.EstornarTarefa(tarefaSelecionadaConcluida);
                     JOptionPane.showMessageDialog(null, "Tarefa estornada com sucesso!");
                 }
             }

@@ -50,18 +50,13 @@ public class TarefaService {
         repository.AlterarStatusTarefa(tarefa);
     }
 
-    public void EstornarTarefa(int id) throws Exception{
-        Tarefas tarefa = new Tarefas();
+    public void EstornarTarefa(Tarefas tarefa) throws Exception{
         if (tarefa.getStatus() == Tarefas.StatusTarefa.EM_ANDAMENTO){
-            Tarefas.StatusTarefa status = Tarefas.StatusTarefa.PENDENTE;
-            
-            tarefa = new Tarefas(id, status);
+            tarefa.setStatus(Tarefas.StatusTarefa.PENDENTE);
             repository.AlterarStatusTarefa(tarefa);
         }
         else if(tarefa.getStatus() == Tarefas.StatusTarefa.CONCLUIDA){
-            Tarefas.StatusTarefa status = Tarefas.StatusTarefa.EM_ANDAMENTO;
-            
-            tarefa = new Tarefas(id, status);
+            tarefa.setStatus(Tarefas.StatusTarefa.EM_ANDAMENTO);
             repository.AlterarStatusTarefa(tarefa);
         }
     }

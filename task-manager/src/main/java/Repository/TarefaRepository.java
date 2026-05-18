@@ -73,17 +73,6 @@ public class TarefaRepository {
         stmt.close();
     }
     
-    public void DesativarTarefa(Tarefas tarefa) throws Exception{
-        String sql = "UPDATE tb_tarefas SET ativo = ? WHERE od = ?";
-        
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setBoolean(1, tarefa.isAtivo());
-        stmt.setInt(2, tarefa.getId());
-        
-        stmt.executeUpdate();
-        stmt.close();
-    }
-    
     public List<Tarefas> listarTarefas() throws Exception{
         List<Tarefas> lista = new ArrayList<>();
         String sql = "Select * from tb_tarefas";
