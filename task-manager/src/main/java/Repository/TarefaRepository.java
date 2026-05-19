@@ -39,13 +39,12 @@ public class TarefaRepository {
     }
     
     public void AtualizarTarefa(Tarefas tarefa) throws Exception{
-        String sql = "UPDATE tb_tarefas set TITULO=?, DESCRICAO=?, ATIVO=? WHERE ID=?";
+        String sql = "UPDATE tb_tarefas set TITULO=?, DESCRICAO=? WHERE ID=?";
         
         PreparedStatement stmt = conn.prepareStatement(sql);
         stmt.setString(1, tarefa.getTitulo());
         stmt.setString(2, tarefa.getDescricao());
-        stmt.setBoolean(3, tarefa.isAtivo());
-        stmt.setInt(4, tarefa.getId());
+        stmt.setInt(3, tarefa.getId());
         
         stmt.executeUpdate();
         stmt.close();

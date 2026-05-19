@@ -447,7 +447,24 @@ public class frmTela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConcluirActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
-        
+        try {
+            if(txtTitulo.getText().isEmpty() && txtDescricao.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Certifique que todos os campos estão preenchidos!");
+            }
+            else{
+                String titulo = txtTitulo.getText();
+                String descricacao = txtDescricao.getText();
+                int id = Integer.parseInt(txtCodigo.getText().toString());
+                TarefaService service = new TarefaService();
+                service.AtualizarTarefa(titulo, descricacao, id);
+                JOptionPane.showMessageDialog(null, "Tarefa atualziada com sucesso");
+                util.LimpaTela(jPanel2);
+                jTabbedPane1.setSelectedIndex(1);
+            }
+        } catch (Exception erro) {
+            erro.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Erro para atualizar a tarefa - Erro:" + erro);
+        }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed

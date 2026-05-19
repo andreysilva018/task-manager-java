@@ -27,6 +27,12 @@ public class Tarefas {
         this.status = status;
         this.ativo = ativo;
     }
+    
+    public Tarefas(String titulo, String descricao, int id){
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.id = id;
+    }
         
     public Tarefas(int id, StatusTarefa status){
         this.id = id;

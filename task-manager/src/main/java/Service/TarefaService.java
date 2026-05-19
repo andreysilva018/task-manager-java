@@ -24,6 +24,8 @@ public class TarefaService {
     }
     
     public void AtualizarTarefa(String titulo, String descricao, int id) throws Exception{
+        Tarefas tarefa = new Tarefas(titulo, descricao, id);
+        repository.AtualizarTarefa(tarefa);
     }
     
     public void InativarTarefa(int id) throws Exception{
