@@ -190,10 +190,12 @@ Principais telas
 O sistema possui uma interface desktop com abas para:
 
 - Cadastro de tarefas:
+<img width="996" height="763" alt="image" src="https://github.com/user-attachments/assets/ece34899-92f5-4c70-9d9a-dba6bb7b46a9" />
 
 Permite cadastrar, atualizar e excluir tarefas.
 
-- Lista de tarefas
+- Lista de tarefas:
+<img width="1006" height="767" alt="image" src="https://github.com/user-attachments/assets/2738b248-385d-4027-9a81-d496f460b664" />
 
 Exibe as tarefas separadas por status:
 
@@ -208,7 +210,7 @@ Também permite alterar o status da tarefa através dos botões:
 - Estornar
 - Editar
 
-##Aprendizados do projeto
+##Aprendizados do projeto##
 Durante o desenvolvimento deste sistema, foram praticados conhecimentos como:
 
 - Estruturação de projeto Java
