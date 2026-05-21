@@ -49,7 +49,9 @@ Tecnologias utilizadas:
 - Programação Orientada a Objetos
 - Git e GitHub
 
-Estrutura do projeto:
+---
+
+## Estrutura do projeto:
 ```
 task-manager-java/
 │
@@ -78,7 +80,9 @@ task-manager-java/
 
 ```
 
-Conceitos aplicados:
+---
+
+## Conceitos aplicados:
 Este projeto aplica conceitos importantes de desenvolvimento Java, como:
 
 - Criação de interface gráfica com Swing
@@ -92,7 +96,9 @@ Este projeto aplica conceitos importantes de desenvolvimento Java, como:
 - Uso de Maven para gerenciamento do projeto
 - Organização do código em pacotes
 
-Banco de dados:
+---
+
+## Banco de dados:
 O projeto utiliza MySQL com o banco:
 ```
 listatarefas
@@ -116,7 +122,7 @@ CREATE TABLE tb_tarefas (
 );
 ```
 
-Configuração da conexão
+## Configuração da conexão
 A conexão com o banco está configurada na classe:
 ```
 connection/ConnectionFactory.java
@@ -143,7 +149,9 @@ DriverManager.getConnection(
 );
 ```
 
-Como executar o projeto
+---
+
+## Como executar o projeto
 Pré-requisitos:
 Antes de executar, é necessário ter instalado:
 
@@ -152,7 +160,7 @@ Antes de executar, é necessário ter instalado:
 - Maven
 - NetBeans, IntelliJ IDEA ou outra IDE Java
 
-Passo a passo:
+### Passo a passo:
 1. Clone o repositório:
 ```
 git clone https://github.com/andreysilva018/task-manager-java.git
@@ -185,9 +193,12 @@ src/main/java/connection/ConnectionFactory.java
 ```
 Main.java
 ```
+
+---
+
 Principais telas
 
-O sistema possui uma interface desktop com abas para:
+## O sistema possui uma interface desktop com abas para:
 
 - Cadastro de tarefas:
 <img width="996" height="763" alt="image" src="https://github.com/user-attachments/assets/ece34899-92f5-4c70-9d9a-dba6bb7b46a9" />
@@ -197,20 +208,22 @@ Permite cadastrar, atualizar e excluir tarefas.
 - Lista de tarefas:
 <img width="1006" height="767" alt="image" src="https://github.com/user-attachments/assets/2738b248-385d-4027-9a81-d496f460b664" />
 
-Exibe as tarefas separadas por status:
+### Exibe as tarefas separadas por status:
 
 - Pendentes
 - Em andamento
 - Concluídas
 
-Também permite alterar o status da tarefa através dos botões:
+### Também permite alterar o status da tarefa através dos botões:
 
 - Atender
 - Concluir
 - Estornar
 - Editar
 
-##Aprendizados do projeto##
+---
+
+## Aprendizados do projeto
 Durante o desenvolvimento deste sistema, foram praticados conhecimentos como:
 
 - Estruturação de projeto Java
@@ -220,3 +233,32 @@ Durante o desenvolvimento deste sistema, foram praticados conhecimentos como:
 - Separação de responsabilidades
 - Uso de boas práticas básicas de organização
 - Trabalho com versionamento no GitHub
+
+Melhorias futuras
+
+## Algumas melhorias que podem ser implementadas futuramente:
+
+- Validação mais completa dos campos
+- Filtro de tarefas por status
+- Pesquisa por título
+- Tela de login
+- Cadastro de usuários
+- Controle de prioridade
+- Data de criação e prazo da tarefa
+- Geração de relatório
+- Melhorias visuais na interface
+- Tratamento mais detalhado de exceções
+- Uso de padrão DAO com interfaces
+- Migração para JavaFX ou aplicação web
+
+## Autor:
+- Desenvolvido por Andrey Vinícius.
+- GitHub: https://github.com/andreysilva018
+- LinkedIn: www.linkedin.com/in/andrey-ssilva
+- Portfólio: https://andreyportifolio.netlify.app/ 
+
+## Licença
+" Este projeto foi desenvolvido para fins de estudo e prática de desenvolvimento Java."
+
+## Agradecimentos:
+- Obrigado por visualizar este projeto! 🚀
