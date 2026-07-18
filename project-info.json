@@ -30,18 +30,21 @@
     "remote_url": "https://github.com/andreysilva018/task-manager-java.git",
     "current_branch": "main",
     "recent_commits": [
+      "d513aa8 feat: adicionando arquivo json que foi gerado com o agente de analise de projetos",
+      "4598cfe feat: adicionando imagens do sistema que estão na Readme em uma pasta separada",
       "7690dc6 Delete aC.adçkdbvkljshdbflhjksdfgvlhidkjvgbdwsopivdwsv",
       "08251c0 Delete dkvljbdslkv",
-      "d0602df docs: Fazer Readme do Projeto closes #14",
-      "617993b Update README.md",
-      "bc8010e Update README.md"
+      "d0602df docs: Fazer Readme do Projeto closes #14"
     ]
   },
   "features": [],
   "learnings": [],
-  "status": "90%",
+  "status": "95%",
   "license": "",
-  "images": [],
+  "images": [
+    "Imagens-Readme/Cadastro-de-Tarefas.png",
+    "Imagens-Readme/Gereciamento-de-Tarefas.png"
+  ],
   "important_files": [
     ".gitignore",
     "task-manager/pom.xml"
@@ -49,6 +52,9 @@
   "existing_readme": "README.md",
   "directory_structure": [
     ".gitignore",
+    "Imagens-Readme",
+    "Imagens-Readme/Cadastro-de-Tarefas.png",
+    "Imagens-Readme/Gereciamento-de-Tarefas.png",
     "README.md",
     "task-manager",
     "task-manager/nbactions.xml",
