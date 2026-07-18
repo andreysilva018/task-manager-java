@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "name": "task-manager-java",
+  "root_path": "C:/Users/Admin/OneDrive/Desktop/Andrey/Task/task-manager-java",
+  "description": "",
+  "problem": "",
+  "project_type": "",
+  "primary_language": "Java",
+  "languages": [
+    "Java",
+    "SQL"
+  ],
+  "frameworks": [],
+  "dependency_managers": [
+    "Maven"
+  ],
+  "databases": [
+    "MySQL"
+  ],
+  "technologies": [
+    "Java",
+    "SQL",
+    "Maven",
+    "MySQL"
+  ],
+  "repository_url": "https://github.com/andreysilva018/task-manager-java",
+  "git": {
+    "is_repository": true,
+    "remote_name": "origin",
+    "remote_url": "https://github.com/andreysilva018/task-manager-java.git",
+    "current_branch": "main",
+    "recent_commits": [
+      "7690dc6 Delete aC.adçkdbvkljshdbflhjksdfgvlhidkjvgbdwsopivdwsv",
+      "08251c0 Delete dkvljbdslkv",
+      "d0602df docs: Fazer Readme do Projeto closes #14",
+      "617993b Update README.md",
+      "bc8010e Update README.md"
+    ]
+  },
+  "features": [],
+  "learnings": [],
+  "status": "90%",
+  "license": "",
+  "images": [],
+  "important_files": [
+    ".gitignore",
+    "task-manager/pom.xml"
+  ],
+  "existing_readme": "README.md",
+  "directory_structure": [
+    ".gitignore",
+    "README.md",
+    "task-manager",
+    "task-manager/nbactions.xml",
+    "task-manager/pom.xml",
+    "task-manager/src",
+    "task-manager/src/main"
+  ]
+}
